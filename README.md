@@ -6,5 +6,6 @@ You can alter the parallax characteristics, i.e. the distance that the image app
 
 It's written in Swift, using a storyboard to setup the UICollectionView and the UICollectionViewCell and the demo images are in an assets catalog.
 
+![Example](https://raw.github.com/devedup/ParallaxUICollectionView/master/ParallaxGif.gif)
 
 
