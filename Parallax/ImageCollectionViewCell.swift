@@ -13,9 +13,9 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var label: UILabel!
         
-    func parallaxTheImageViewScrollOffset(offsetPoint:CGPoint, scrollDirection:UICollectionViewScrollDirection) {
+    func parallaxTheImageViewScrollOffset(offsetPoint:CGPoint, scrollDirection:UICollectionView.ScrollDirection) {
         // Horizontal? If not, it's vertical
-        let isHorizontal = .Horizontal == scrollDirection
+        let isHorizontal = .horizontal == scrollDirection
         
         // Choose the amount of parallax, one might say the distance from the viewer
         // 1 would mean the image wont move at all ie. very far away, 0.1 it moves a little i.e. very close
@@ -29,8 +29,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         
         // Now we have final position, set the offset of the frame of the background iamge
         let frame = backgroundImageView.bounds
-        let offsetFame = CGRectOffset(frame, CGFloat(finalX), CGFloat(finalY))
-        backgroundImageView.frame = offsetFame
+        let offsetFrame = frame.offsetBy(dx: CGFloat(finalX), dy: CGFloat(finalY))
+        backgroundImageView.frame = offsetFrame
     }
-    
 }

@@ -8,24 +8,25 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewLayout: UICollectionViewFlowLayout!
     
     // MARK: DataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 11;
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell: ImageCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("ImageCollectionViewCell", forIndexPath: indexPath) as! ImageCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as! ImageCollectionViewCell
         cell.label.text = "Cell \(indexPath.row)"
         cell.backgroundImageView.image = UIImage(named: "Parallax \(indexPath.row + 1)")
         
         // Parallax cell setup
-        cell.parallaxTheImageViewScrollOffset(self.collectionView.contentOffset, scrollDirection: self.collectionViewLayout.scrollDirection)
+        cell.parallaxTheImageViewScrollOffset(offsetPoint: self.collectionView.contentOffset, scrollDirection: self.collectionViewLayout.scrollDirection)
         return cell
     }
     
@@ -38,11 +39,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // MARK: Scrolling
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Parallax visible cells
-        for cell: ImageCollectionViewCell in collectionView.visibleCells() as! [ImageCollectionViewCell] {
-            cell.parallaxTheImageViewScrollOffset(self.collectionView.contentOffset, scrollDirection: self.collectionViewLayout.scrollDirection)
+        for cell: ImageCollectionViewCell in collectionView.visibleCells as! [ImageCollectionViewCell] {
+            cell.parallaxTheImageViewScrollOffset(offsetPoint: self.collectionView.contentOffset, scrollDirection: self.collectionViewLayout.scrollDirection)
         }
     }
 }
-
